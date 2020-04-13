@@ -11,7 +11,7 @@ services:
         volumes:
             - ${CONFIG}/web:/config
             - ${CONFIG}/web/letsencrypt:/etc/letsencrypt
-            - ${CONFIG}/web/certbot-update:/etc/cont-init.d/05-certboot-update
+            - ~/docker-jitsi-meet/certbot-update:/etc/cont-init.d/05-certboot-update
             - ${CONFIG}/transcripts:/usr/share/jitsi-meet/transcripts
         environment:
             - ENABLE_AUTH
