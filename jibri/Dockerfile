@@ -8,7 +8,7 @@ ARG CHROMEDRIVER_MAJOR_RELEASE=78
 
 RUN \
 	apt-dpkg-wrap apt-get update \
-	&& apt-dpkg-wrap apt-get install -y jibri \
+	&& apt-dpkg-wrap apt-get install -y jibri libgl1-mesa-dri \
 	&& apt-cleanup
 
 RUN \
@@ -38,11 +38,9 @@ RUN \
 	&& chromedriver --version
 
 RUN \
-        [ "$JITSI_RELEASE" = "unstable" ] \
-        && apt-dpkg-wrap apt-get update \
-        && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations \
-        && apt-cleanup \
-        || true
+        apt-dpkg-wrap apt-get update \
+        && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations jq \
+        && apt-cleanup
 
 COPY rootfs/ /
 
