@@ -10,8 +10,6 @@ services:
             - '${HTTPS_PORT}:443'
         volumes:
             - ${CONFIG}/web:/config:Z
-            - ${CONFIG}/web/letsencrypt:/etc/letsencrypt:Z
-            - ~/docker-jitsi-meet/certbot-update:/etc/cont-init.d/05-certboot-update
             - ${CONFIG}/transcripts:/usr/share/jitsi-meet/transcripts:Z
         environment:
             - ENABLE_LETSENCRYPT
