@@ -18,6 +18,7 @@ services:
             - DISABLE_HTTPS
             - LETSENCRYPT_DOMAIN
             - LETSENCRYPT_EMAIL
+            - LETSENCRYPT_USE_STAGING
             - PUBLIC_URL
             - TZ
             - AMPLITUDE_ID
