@@ -10,16 +10,16 @@ services:
             - '${HTTPS_PORT}:443'
         volumes:
             - ${CONFIG}/web:/config:Z
-            - ${CONFIG}/web/letsencrypt:/etc/letsencrypt:Z
-            - ~/docker-jitsi-meet/certbot-update:/etc/cont-init.d/05-certboot-update
             - ${CONFIG}/transcripts:/usr/share/jitsi-meet/transcripts:Z
         environment:
             - ENABLE_LETSENCRYPT
             - ENABLE_HTTP_REDIRECT
+            - ENABLE_HSTS
             - ENABLE_XMPP_WEBSOCKET
             - DISABLE_HTTPS
             - LETSENCRYPT_DOMAIN
             - LETSENCRYPT_EMAIL
+            - LETSENCRYPT_USE_STAGING
             - PUBLIC_URL
             - TZ
             - AMPLITUDE_ID
@@ -52,6 +52,8 @@ services:
             - ENABLE_NO_AUDIO_DETECTION
             - ENABLE_P2P
             - ENABLE_PREJOIN_PAGE
+            - ENABLE_WELCOME_PAGE
+            - ENABLE_CLOSE_PAGE
             - ENABLE_RECORDING
             - ENABLE_REMB
             - ENABLE_REQUIRE_DISPLAY_NAME
@@ -72,6 +74,8 @@ services:
             - MATOMO_SITE_ID
             - MICROSOFT_API_APP_CLIENT_ID
             - NGINX_RESOLVER
+            - NGINX_WORKER_PROCESSES
+            - NGINX_WORKER_CONNECTIONS
             - PEOPLE_SEARCH_URL
             - RESOLUTION
             - RESOLUTION_MIN
@@ -79,6 +83,8 @@ services:
             - RESOLUTION_WIDTH_MIN
             - START_AUDIO_ONLY
             - START_AUDIO_MUTED
+            - DISABLE_AUDIO_LEVELS
+            - ENABLE_NOISY_MIC_DETECTION
             - START_BITRATE
             - START_VIDEO_MUTED
             - TESTING_CAP_SCREENSHARE_BITRATE
@@ -136,6 +142,7 @@ services:
             - XMPP_MUC_MODULES
             - XMPP_INTERNAL_MUC_MODULES
             - XMPP_RECORDER_DOMAIN
+            - XMPP_CROSS_DOMAIN
             - JICOFO_COMPONENT_SECRET
             - JICOFO_AUTH_USER
             - JICOFO_AUTH_PASSWORD
