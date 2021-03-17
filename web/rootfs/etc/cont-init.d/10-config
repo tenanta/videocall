@@ -10,12 +10,10 @@ mkdir -p \
 # generate keys (maybe)
 if [[ $DISABLE_HTTPS -ne 1 ]]; then
     if [[ $ENABLE_LETSENCRYPT -eq 1 ]]; then
-        if [[ ! -f /config/acme.sh/acme.sh ]]; then
-            mkdir /config/acme.sh
-            pushd /opt
-            sh ./acme.sh --install --home /config/acme.sh --accountemail $LETSENCRYPT_EMAIL
-            popd
-        fi
+        mkdir -p /config/acme.sh
+        pushd /opt
+        sh ./acme.sh --install --home /config/acme.sh --accountemail $LETSENCRYPT_EMAIL
+        popd
         if [[ ! -f /config/acme-certs/$LETSENCRYPT_DOMAIN/fullchain.pem ]]; then
             STAGING=""
             if [[ $LETSENCRYPT_USE_STAGING -eq 1 ]]; then
@@ -85,6 +83,9 @@ fi
 
 if [[ ! -f /config/interface_config.js ]]; then
     cp /defaults/interface_config.js /config/interface_config.js
+    if [[ -f /config/custom-interface_config.js ]]; then
+        cat /config/custom-interface_config.js >> /config/interface_config.js
+    fi
 
     # It will remove parameter 'closedcaptions' from TOOLBAR_BUTTONS if ENABLE_TRANSCRIPTIONS is false,
     # because it enabled by default, but not supported out of the box.
